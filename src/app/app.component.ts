@@ -27,12 +27,13 @@ export class AppComponent {
 
   async connect() {
     await this.muse.connect();
+    this.muse.start();
 
-    const leftChannel = channelNames.indexOf('AF7');
-    const rightChannel = channelNames.indexOf('AF8');
+    const leftEyeChannel = channelNames.indexOf('AF7');
+    const rightEyeChannel = channelNames.indexOf('AF8');
 
     this.leftBlinks = this.muse.eegReadings
-      .filter(r => r.electrode === leftChannel)
+      .filter(r => r.electrode === leftEyeChannel)
       .map(r => Math.max(...r.samples.map(n => Math.abs(n))))
       .filter(max => max > 500)
       .switchMap(() =>
@@ -43,7 +44,7 @@ export class AppComponent {
       );
 
     this.rightBlinks = this.muse.eegReadings
-      .filter(r => r.electrode === rightChannel)
+      .filter(r => r.electrode === rightEyeChannel)
       .map(r => Math.max(...r.samples.map(n => Math.abs(n))))
       .filter(max => max > 500)
       .switchMap(() =>
@@ -52,8 +53,6 @@ export class AppComponent {
           Observable.timer(500).map(() => 0)
         )
       );
-
-    this.muse.start();
   }
 
   disconnect() {
