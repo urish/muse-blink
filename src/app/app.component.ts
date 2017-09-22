@@ -20,7 +20,6 @@ export class AppComponent {
   rightBlinks: Observable<number>;
 
   constructor() {
-    this.muse = new MuseClient();
     this.muse.connectionStatus.subscribe(newStatus => {
       this.connected = newStatus;
     });
