@@ -25,7 +25,7 @@ export class AppComponent {
     });
   }
 
-  async connect() {
+  async onConnectButtonClick() {
     await this.muse.connect();
     this.muse.start();
 

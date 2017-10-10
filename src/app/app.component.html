@@ -2,7 +2,7 @@
 
   <h1>Muse Blink App</h1>
 
-  <button (click)="connect()" *ngIf="!connected">Connect</button>
+  <button (click)="onConnectButtonClick()" *ngIf="!connected">Connect</button>
   <button (click)="disconnect()" *ngIf="connected">Disconnect</button>
 
   <div class="eyes">
